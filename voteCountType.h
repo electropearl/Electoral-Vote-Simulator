@@ -6,36 +6,33 @@
 
 #include "binarySearchTree.h"
 
-
-using namespace std;
-
 class voteCountType : public bSearchTreeType<voteCountType> {
-    friend ostream& operator<<(ostream&, const voteCountType&);
+    friend std::ostream& operator<<(std::ostream&, const voteCountType&);
 
    public:
 
-    void setStateInfo(string stateID, string stateName, int eVoteAvailable,
+    void setStateInfo(std::string stateID, std::string stateName, int eVoteAvailable,
                     int voteCountRepublican, int voteCountDemocrat);
 
     int getNoOfCopiesInStock() const;
     int getPopularVoteRepublican() const;
     int getPopularVoteDemocrat() const;
-    bool dvdSearch(string title);
-    bool isDVDAvailable(string title);
+    bool dvdSearch(std::string title);
+    bool isDVDAvailable(std::string title);
 
     void printTitle() const;
-    void printInfo(string stateID) const;
-    bool checkTitle(string title);
+    void printInfo(std::string stateID) const;
+    bool checkTitle(std::string title);
     bool updatePopularVotesDemocrat(int thisVoteCount);
     bool updatePopularVotesRepublican(int thisVoteCount);
-    string getTitle() const;
+    std::string getTitle() const;
     void setCopiesInStock(int num);
-    void postDemocratUpdate(string stateID, int voteCount);
-    void postRepublicanUpdate(string stateID, int voteCount);
+    void postDemocratUpdate(std::string stateID, int voteCount);
+    void postRepublicanUpdate(std::string stateID, int voteCount);
     void whosWinning(int &republican, int &democrat);
-    
 
-    voteCountType(string stateID = "", string stateName = "", int setInStock = 0,
+
+    voteCountType(std::string stateID = "", std::string stateName = "", int setInStock = 0,
             int voteCountRepublican = 0, int voteCountDemocrat = 0);
 
     // Overload relational operators
@@ -47,15 +44,15 @@ class voteCountType : public bSearchTreeType<voteCountType> {
     bool operator>=(const voteCountType&) const;
 
    private:
-    string stateID;
-    string stateName;
+    std::string stateID;
+    std::string stateName;
     int electorialVotes;         // todo : unsigned
     int popularVotesRepublican;  // todo : unsigned
     int popularVotesDemocrat;    // todo : unsigned
-    void searchDVDList(string title, bool& found, nodeType<voteCountType>*& current) const;
+    void searchDVDList(std::string title, bool& found, nodeType<voteCountType>*& current) const;
     void inorderTitle(nodeType<voteCountType> *p, int &republican, int &democrat) const;
-    
-   
+
+
 };
 
 #endif

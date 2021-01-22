@@ -6,8 +6,6 @@
 
 #include "binaryTree.h"
 
-using namespace std;
-
 template <class elemType>
 class bSearchTreeType : public binaryTreeType<elemType> {
    public:
@@ -49,7 +47,7 @@ bool bSearchTreeType<elemType>::search(const elemType &searchItem) const {
     bool found = false;
 
     if (this->root == nullptr)
-        cout << "Cannot search an empty tree." << endl;
+        std::cout << "Cannot search an empty tree." << std::endl;
     else {
         current = this->root;
 
@@ -87,9 +85,9 @@ void bSearchTreeType<elemType>::insert(const elemType &insertItem) {
             trailCurrent = current;
 
             if (current->info == insertItem) {
-                cout << "The item to be inserted is already ";
-                cout << "in the tree -- duplicates are not "
-                     << "allowed." << endl;
+                std::cout << "The item to be inserted is already ";
+                std::cout << "in the tree -- duplicates are not "
+                     << "allowed." << std::endl;
                 return;
             } else if (current->info > insertItem)
                 current = current->lLink;
@@ -111,7 +109,7 @@ void bSearchTreeType<elemType>::deleteNode(const elemType &deleteItem) {
     bool found = false;
 
     if (this->root == nullptr)
-        cout << "Cannot delete from an empty tree." << endl;
+        std::cout << "Cannot delete from an empty tree." << std::endl;
     else {
         current = this->root;
         trailCurrent = this->root;
@@ -130,7 +128,7 @@ void bSearchTreeType<elemType>::deleteNode(const elemType &deleteItem) {
         }  // end while
 
         if (current == nullptr)
-            cout << "The item to be deleted is not in the tree." << endl;
+            std::cout << "The item to be deleted is not in the tree." << std::endl;
         else if (found) {
             if (current == this->root)
                 deleteFromTree(this->root);
@@ -139,7 +137,7 @@ void bSearchTreeType<elemType>::deleteNode(const elemType &deleteItem) {
             else
                 deleteFromTree(trailCurrent->rLink);
         } else
-            cout << "The item to be deleted is not in the tree." << endl;
+            std::cout << "The item to be deleted is not in the tree." << std::endl;
     }
 }  // end deleteNode
 
@@ -150,7 +148,7 @@ void bSearchTreeType<elemType>::deleteFromTree(nodeType<elemType> *&p) {
     nodeType<elemType> *temp;          // pointer to delete the node
 
     if (p == nullptr)
-        cout << "Error: The node to be deleted does not exist." << endl;
+        std::cout << "Error: The node to be deleted does not exist." << std::endl;
     else if (p->lLink == nullptr && p->rLink == nullptr) {
         temp = p;
         p = nullptr;

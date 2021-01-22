@@ -4,9 +4,7 @@
 #include "voteCountType.h"
 #include "binarySearchTree.h"
 
-using namespace std;
-//A
-bool voteCountType::isDVDAvailable(string stateID) 
+bool voteCountType::isDVDAvailable(std::string stateID)
 {
     bool found;
     nodeType<voteCountType> *location;
@@ -15,13 +13,13 @@ bool voteCountType::isDVDAvailable(string stateID)
 
     if (found)
         found = (location->info.getNoOfCopiesInStock() > 0);
-    else  
+    else
         found = false;
 
     return found;
 }
 
-void voteCountType::postDemocratUpdate(string stateID, int voteCount)
+void voteCountType::postDemocratUpdate(std::string stateID, int voteCount)
 {
     bool found = false;
     nodeType<voteCountType> *location;
@@ -31,11 +29,11 @@ void voteCountType::postDemocratUpdate(string stateID, int voteCount)
     if (found)
         location->info.updatePopularVotesDemocrat(voteCount);
     else
-        cout << "State not found " << stateID
-            << endl;
+        std::cout << "State not found " << stateID
+                  << std::endl;
 }
 
-void voteCountType::postRepublicanUpdate(string stateID, int voteCount)
+void voteCountType::postRepublicanUpdate(std::string stateID, int voteCount)
 {
     bool found = false;
     nodeType<voteCountType> *location;
@@ -45,11 +43,11 @@ void voteCountType::postRepublicanUpdate(string stateID, int voteCount)
     if (found)
         location->info.updatePopularVotesRepublican(voteCount);
     else{
-        cout << "State not found " << stateID<< endl;
+        std::cout << "State not found " << stateID << std::endl;
     }
 }
 
-bool voteCountType::dvdSearch(string stateID)
+bool voteCountType::dvdSearch(std::string stateID)
 {
     bool found = false;
     nodeType<voteCountType> *location;
@@ -60,22 +58,22 @@ bool voteCountType::dvdSearch(string stateID)
     return found;
 }
 
-void voteCountType::searchDVDList(string title, 
+void voteCountType::searchDVDList(std::string title,
                           bool& found,
                           nodeType<voteCountType>* &current) const
 {
-    found = false;   
-   
+    found = false;
+
     voteCountType temp;
 
-    
-    temp.setStateInfo(title, "", 0, 0, 0);            
+
+    temp.setStateInfo(title, "", 0, 0, 0);
 
     if (root == nullptr)  //tree is empty
-        cout << "Cannot search an empty list. " << endl;
+        std::cout << "Cannot search an empty list. " << std::endl;
     else
     {
-        current = root; //set current point to the root node 
+        current = root; //set current point to the root node
                         //of the binary tree
         found = false;  //set found to false
 
@@ -90,18 +88,17 @@ void voteCountType::searchDVDList(string title,
 } //end searchDVDList
 
 
-void voteCountType::inorderTitle
-                          (nodeType<voteCountType> *p, int &republican, int &democrat) const
+void voteCountType::inorderTitle(nodeType<voteCountType> *p, int &republican, int &democrat) const
 {
     if (p != nullptr)
-    { 
+    {
         inorderTitle(p->lLink, republican, democrat);
         p->info.whosWinning(republican,democrat);
         inorderTitle(p->rLink, republican,democrat);
     }
 }
-//B
-void voteCountType::setStateInfo(string stateID, string stateName,
+
+void voteCountType::setStateInfo(std::string stateID, std::string stateName,
                     int eVoteAvailable, int voteCountRepublican, int voteCountDemocrat) {
     this->stateID = stateID;
     this->stateName = stateName;
@@ -125,26 +122,24 @@ int voteCountType::getPopularVoteDemocrat() const {
 
 void voteCountType::printTitle() const
 {
-    cout << "State ID: " << stateID << endl;
+    std::cout << "State ID: " << stateID << std::endl;
 }
 
-void voteCountType::printInfo(string stateID) const
-{  
+void voteCountType::printInfo(std::string stateID) const
+{
     bool found = false;
     nodeType<voteCountType> *location;
 
     searchDVDList(stateID, found, location);
 
-    
-    cout << "State ID: " << location->info.stateID << endl;
-    cout << "State Name: " << location->info.stateName << endl;
-    cout << "Electorial Votes Available: " << location->info.electorialVotes << endl;
-    cout << "Popular vote count (Republican): " << location->info.popularVotesRepublican << endl;
-    cout << "Popular vote count (Democrat): " << location->info.popularVotesDemocrat << endl;
-
+    std::cout << "State ID: " << location->info.stateID << std::endl;
+    std::cout << "State Name: " << location->info.stateName << std::endl;
+    std::cout << "Electorial Votes Available: " << location->info.electorialVotes << std::endl;
+    std::cout << "Popular vote count (Republican): " << location->info.popularVotesRepublican << std::endl;
+    std::cout << "Popular vote count (Democrat): " << location->info.popularVotesDemocrat << std::endl;
 }
 
-bool voteCountType::checkTitle(string stateID)
+bool voteCountType::checkTitle(std::string stateID)
 {
     return(this->stateID == stateID);
 }
@@ -169,17 +164,17 @@ bool voteCountType::updatePopularVotesRepublican(int thisVoteCount)
     return result;
 }
 
-void voteCountType::setCopiesInStock(int num) 
+void voteCountType::setCopiesInStock(int num)
 {
     electorialVotes = num;
 }
 
-string voteCountType::getTitle() const
+std::string voteCountType::getTitle() const
 {
     return stateID;
 }
 
-voteCountType::voteCountType(string stateID, string stateName, int eVotesAvailable, int voteCountRepublican, int voteCountDemocrat) {
+voteCountType::voteCountType(std::string stateID, std::string stateName, int eVotesAvailable, int voteCountRepublican, int voteCountDemocrat) {
     setStateInfo(stateID, stateName, eVotesAvailable, voteCountRepublican, voteCountDemocrat);
 }
 
@@ -214,15 +209,15 @@ bool voteCountType::operator>=(const voteCountType& right) const
     return (this->stateID >= right.stateID);
 }
 
-ostream& operator<< (ostream& osObject, const voteCountType& dvd)
+std::ostream& operator<< (std::ostream& osObject, const voteCountType& dvd)
 {
-    osObject << endl;
-    osObject << "  State ID: " << dvd.stateID << endl; 
-    osObject << "State Name: " << dvd.stateName << endl;
-    osObject << "Electorial Votes Available: " << dvd.electorialVotes << endl;
-    osObject << "Popular vote count (Republican): " << dvd.popularVotesRepublican << endl;
-    osObject << "Popular vote count (Democrat): " << dvd.popularVotesDemocrat << endl;
-    osObject << "_____________________________________" << endl;
+    osObject << std::endl;
+    osObject << "  State ID: " << dvd.stateID << std::endl;
+    osObject << "State Name: " << dvd.stateName << std::endl;
+    osObject << "Electorial Votes Available: " << dvd.electorialVotes << std::endl;
+    osObject << "Popular vote count (Republican): " << dvd.popularVotesRepublican << std::endl;
+    osObject << "Popular vote count (Democrat): " << dvd.popularVotesDemocrat << std::endl;
+    osObject << "_____________________________________" << std::endl;
     return osObject;
 }
 
@@ -238,9 +233,9 @@ void voteCountType:: whosWinning(int &republican, int &democrat){
 
 }
 
-void createDVDList(ifstream& infile, voteCountType& dvdList) {
-    string stateID;
-    string stateName;
+void createDVDList(std::ifstream& infile, voteCountType& dvdList) {
+    std::string stateID;
+    std::string stateName;
     int electorialVotes;
 
     voteCountType newState;
@@ -259,33 +254,30 @@ void createDVDList(ifstream& infile, voteCountType& dvdList) {
 }
 
 void displayMenu() {
-    cout<<endl;
-    cout << "Select one of the following:" << endl;
-    cout << "1: Post new update message to database" << endl;
-    cout << "2: Print status of a state" << endl;
-    cout << "3: Print all states and current status" << endl;
-    cout << "4: Determine who is winning" << endl;
-    cout << "9: To exit" << endl;
+    std::cout<<std::endl;
+    std::cout << "Select one of the following:" << std::endl;
+    std::cout << "1: Post new update message to database" << std::endl;
+    std::cout << "2: Print status of a state" << std::endl;
+    std::cout << "3: Print all states and current status" << std::endl;
+    std::cout << "4: Determine who is winning" << std::endl;
+    std::cout << "9: To exit" << std::endl;
 }
 
 
 int main()
 {
     voteCountType dvdList;
-    
-    
-
     int choice,n,a;
-    string title;
+    std::string title;
     //char p;
 
-    ifstream infile;
+    std::ifstream infile;
 
-    infile.open("/Users/nick/Downloads/lab09Transition/states.txt");
+    infile.open("states.txt");
 
     if (!infile) {
-        cout << "The input file does not exist. "
-             << "Program terminates!!" << endl;
+        std::cout << "The input file does not exist. "
+             << "Program terminates!!" << std::endl;
         return 1;
     }
 
@@ -293,99 +285,98 @@ int main()
     infile.close();
 
     displayMenu();  // show the menu
-    cout << "Enter your choice: ";
-    cin >> choice;          // get the request
-    cin.ignore(100, '\n');  // ignore the remainingclear
+    std::cout << "Enter your choice: ";
+    std::cin >> choice;          // get the request
+    std::cin.ignore(100, '\n');  // ignore the remainingclear
                             // characters in the line
-    cout << endl;
+    std::cout << std::endl;
 
     while (choice != 9) {
         switch (choice) {
              case 1:
-                 cout << "Post new update to database. Type state ID (SS): ";
-                 getline(cin, title);
+                 std::cout << "Post new update to database. Type state ID (SS): ";
+                 getline(std::cin, title);
                  //cin >> p;
                  //cin >>x;
 
 
-                 
-                 cout << endl;
+
+                 std::cout << std::endl;
 
                  if (dvdList.dvdSearch(title))
                  {
-                    cout << "Which Party would you like to update?" << endl;
-                    cout << "1. Republican " << endl;
-                    cout << "2. Democratic " << endl;
-                    cout<< "Enter your choice: ";
-                    cin >> n;
-                    cout << endl;
+                    std::cout << "Which Party would you like to update?" << std::endl;
+                    std::cout << "1. Republican " << std::endl;
+                    std::cout << "2. Democratic " << std::endl;
+                    std::cout << "Enter your choice: ";
+                    std::cin >> n;
+                    std::cout << std::endl;
                     if(n == 1)
-                    {   cout << "Enter the number to update Republican party: ";
-                        cin >> a;
-                        cout<<endl;
+                    {
+                        std::cout << "Enter the number to update Republican party: ";
+                        std::cin >> a;
+                        std::cout << std::endl;
                         dvdList.postRepublicanUpdate(title , a);
-                        cout << title << " has been updated by "<< a <<endl;
-                        cout<<endl;
+                        std::cout << title << " has been updated by " << a << std::endl;
+                        std::cout << std::endl;
                     }
                     else if (n == 2)
                     {
-                        cout << "Enter the number to update Democratic party: ";
-                        cin >> a;
-                        cout<<endl;
+                        std::cout << "Enter the number to update Democratic party: ";
+                        std::cin >> a;
+                        std::cout << std::endl;
                         dvdList.postDemocratUpdate(title, a);
-                        cout << title << " has been updated by "<< a <<endl;
-                        cout<<endl;
+                        std::cout << title << " has been updated by " << a <<std::endl;
+                        std::cout << std::endl;
                     }
                     else
                     {
-                        cout << "Sorry This choice is not an option."<<endl;
+                        std::cout << "Sorry This choice is not an option."<< std::endl;
                     }
                     break;
                  }
                 else
                 {
-                    cout << "This is not a State: " << title << endl;
+                    std::cout << "This is not a State: " << title << std::endl;
                 }
                 break;
 
             case 2:
-                cout << "Enter a state and to know its status (SS): ";
-                getline(cin, title);
-                cout << endl;
+                std::cout << "Enter a state and to know its status (SS): ";
+                std::getline(std::cin, title);
+                std::cout << std::endl;
                  if (dvdList.dvdSearch(title)) {
                      dvdList.search(title);
                      dvdList.printInfo(title);
 
                  } else
-                     cout << title << " does not exist." <<endl;
+                     std::cout << title << " does not exist." <<std::endl;
                 break;
 
             case 3:
                 dvdList.inorderTraversal();
                 break;
-
             case 4:
             {
                 int republican =0;
                 int democrat = 0;
                 dvdList.whosWinning(republican,democrat);
-                cout << "Republican electorial votes: "<< republican<< endl;
-                cout << "Democrat electorial votes: "<< democrat<< endl;
-                cout << endl;
+                std::cout << "Republican electorial votes: "<< republican<< std::endl;
+                std::cout << "Democrat electorial votes: "<< democrat<< std::endl;
+                std::cout << std::endl;
                 break;
             }
 
             default:
-                cout << "Invalid selection." << endl;
+                std::cout << "Invalid selection." << std::endl;
                 break;
         }
 
         displayMenu();  // display the menu
-        cout << "Enter your choice: ";
-        cin >> choice;          // get the next request
-        cin.ignore(100, '\n');  // ignore the remaining characters in the line
-        cout << endl;
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;          // get the next request
+        std::cin.ignore(100, '\n');  // ignore the remaining characters in the line
+        std::cout << std::endl;
     }
-
     return 0;
 }
